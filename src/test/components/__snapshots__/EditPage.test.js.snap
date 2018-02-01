@@ -1,0 +1,79 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should handle edit expense 1`] = `
+<div>
+  <p>
+    Edit expense 
+    1
+  </p>
+  <button
+    onClick={[Function]}
+  >
+    Remove
+  </button>
+  <ExpenseForm
+    expense={
+      Object {
+        "amount": 195,
+        "createdAt": 0,
+        "description": "Gum",
+        "id": "1",
+        "note": "",
+      }
+    }
+    onSubmit={[Function]}
+  />
+</div>
+`;
+
+exports[`should handle remove expense 1`] = `
+<div>
+  <p>
+    Edit expense 
+    1
+  </p>
+  <button
+    onClick={[Function]}
+  >
+    Remove
+  </button>
+  <ExpenseForm
+    expense={
+      Object {
+        "amount": 195,
+        "createdAt": 0,
+        "description": "Gum",
+        "id": "1",
+        "note": "",
+      }
+    }
+    onSubmit={[Function]}
+  />
+</div>
+`;
+
+exports[`should render EditPage 1`] = `
+<div>
+  <p>
+    Edit expense 
+    1
+  </p>
+  <button
+    onClick={[Function]}
+  >
+    Remove
+  </button>
+  <ExpenseForm
+    expense={
+      Object {
+        "amount": 195,
+        "createdAt": 0,
+        "description": "Gum",
+        "id": "1",
+        "note": "",
+      }
+    }
+    onSubmit={[Function]}
+  />
+</div>
+`;
