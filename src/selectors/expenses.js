@@ -24,3 +24,6 @@ export const getVisibleExpenses = (expenses, {
     return startDateMatch && endDateMatch && textMatch
   })
   .sort((a, b) => b[sortByLookup[sortBy]] - a[sortByLookup[sortBy]])
+
+export const getExpensesTotal = expenses => expenses
+    .reduce((acc, expense) => acc + expense.amount, 0)
