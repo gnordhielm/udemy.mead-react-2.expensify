@@ -4,9 +4,11 @@
   "author": "Gus Nordhielm",
   "license": "MIT",
   "scripts": {
+    "start": "node server/server.js",
     "serve": "live-server public/",
     "build:dev": "webpack",
     "build:dist": "webpack -p --env production",
+    "heroku-postbuild": "yarn run build:dist",
     "dist": "webpack",
     "dev-server": "webpack-dev-server",
     "dev": "webpack-dev-server",
