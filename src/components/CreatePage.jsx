@@ -13,7 +13,7 @@ export class CreatePage extends React.Component {
   render() {
     return (
       <div>
-        <p>Add Expense</p>
+        <h3>Add Expense</h3>
         <ExpenseForm onSubmit={this.onSubmit} />
       </div>
     )

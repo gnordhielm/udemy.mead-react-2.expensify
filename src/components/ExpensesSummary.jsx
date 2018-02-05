@@ -9,17 +9,18 @@ import {
 export const ExpensesSummary = ({
   expensesCount, expensesTotal
 }) => (
-    <p>
+    <h3>
       Viewing {expensesCount} {expensesCount === 1 ? 'expense' : 'expenses'} totalling {numeral(expensesTotal).format('$0,0.00')}
-    </p>
+    </h3>
 )
 
-export default connect(({ expenses, filters }) => {
+const mapState = ({ expenses, filters }) => {
   const filteredExpenses = getVisibleExpenses(expenses, filters)
 
   return {
     expensesCount: filteredExpenses.length,
     expensesTotal: getExpensesTotal(filteredExpenses)
   }
+}
 
-})(ExpensesSummary)
+export default connect(mapState)(ExpensesSummary)
