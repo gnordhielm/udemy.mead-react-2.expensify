@@ -10,7 +10,7 @@
     "heroku-postbuild": "yarn run build:dist",
     "dist": "webpack",
     "dev": "webpack-dev-server",
-    "test": "jest --config=jest.config.json"
+    "test": "jest --config=jest.config.json --watch"
   },
   "dependencies": {
     "babel-cli": "^6.26.0",
@@ -23,6 +23,7 @@
     "css-loader": "^0.28.9",
     "express": "^4.16.2",
     "extract-text-webpack-plugin": "^3.0.2",
+    "firebase": "^4.9.1",
     "moment": "^2.20.1",
     "node-sass": "^4.7.2",
     "normalize.css": "^7.0.0",
@@ -35,6 +36,8 @@
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
     "redux": "^3.7.2",
+    "redux-mock-store": "^1.5.1",
+    "redux-thunk": "^2.2.0",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.20.1",
     "uuid": "^3.2.1",
