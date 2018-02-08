@@ -1,19 +1,19 @@
 import moment from 'moment'
 
 export default [{
-  id: '1',
+  id: 'abc',
   description: 'Gum',
   amount: 195,
   note: '',
   createdAt: 0
 }, {
-  id: '2',
+  id: 'def',
   description: 'Rent',
   note: '',
   amount: 155000,
   createdAt: moment(0).subtract(4, 'days').valueOf()
 }, {
-  id: '3',
+  id: 'ghi',
   description: 'Credit card',
   note: '',
   amount: 4500,
