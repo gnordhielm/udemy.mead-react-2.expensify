@@ -10,7 +10,7 @@
     "heroku-postbuild": "yarn run build:dist",
     "dist": "webpack",
     "dev": "webpack-dev-server",
-    "test": "jest --config=jest.config.json --watch"
+    "test": "cross-env NODE_ENV=test jest --config=jest.config.json --watch"
   },
   "dependencies": {
     "babel-cli": "^6.26.0",
@@ -45,6 +45,8 @@
     "webpack": "^3.10.0"
   },
   "devDependencies": {
+    "cross-env": "^5.1.3",
+    "dotenv": "^5.0.0",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "enzyme-to-json": "^3.3.1",
