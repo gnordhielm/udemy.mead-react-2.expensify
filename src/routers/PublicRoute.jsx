@@ -4,15 +4,12 @@ import { Route, Redirect } from 'react-router-dom'
 
 export const PublicRoute = ({
   isAuthenticated,
-  path,
-  exact,
   component: Component,
-  ...props
+  ...rest
 }) => (
   <Route
-    path={path}
-    exact={exact}
-    component={() => isAuthenticated ?
+    {...rest}
+    component={props => isAuthenticated ?
       <Redirect to="/dashboard"/> :
       <Component {...props} />
     }

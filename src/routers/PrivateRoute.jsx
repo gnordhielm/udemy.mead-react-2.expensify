@@ -5,15 +5,12 @@ import Header from '../components/Header.jsx'
 
 export const PrivateRoute = ({
   isAuthenticated,
-  path,
-  exact,
   component: Component,
-  ...props
+  ...rest
 }) => (
   <Route
-    path={path}
-    exact={exact}
-    component={() => isAuthenticated ?
+    {...rest}
+    component={props => isAuthenticated ?
       <div>
         <Header />
         <Component {...props} />
