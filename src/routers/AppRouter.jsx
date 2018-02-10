@@ -1,17 +1,7 @@
-/*
-
-how can I use this in ops, how can this be better.
-path to string is silly. There should be a more standardized api.
-switch and component are both good
-
-I need resolves somewhere
-Exact is a pain in the ass
-
-*/
 
 import React from 'react'
-import { BrowserRouter, Switch, Route } from 'react-router-dom'
-
+import { Router, Switch, Route } from 'react-router-dom'
+import createHistory from 'history/createBrowserHistory'
 import LoginPage from '../components/LoginPage.jsx'
 import Header from '../components/Header.jsx'
 import DashboardPage from '../components/DashboardPage.jsx'
@@ -20,8 +10,10 @@ import EditPage from '../components/EditPage.jsx'
 import HelpPage from '../components/HelpPage.jsx'
 import NotFoundPage from '../components/NotFoundPage.jsx'
 
+export const history = createHistory()
+
 const AppRouter = () => (
-  <BrowserRouter>
+  <Router history={history}>
     <div>
       <Header></Header>
       <Switch>
@@ -33,7 +25,7 @@ const AppRouter = () => (
         <Route component={NotFoundPage} />
       </Switch>
     </div>
-  </BrowserRouter>
+  </Router>
 )
 
 export default AppRouter

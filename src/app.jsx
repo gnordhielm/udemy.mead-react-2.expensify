@@ -7,11 +7,11 @@ import { firebase } from './firebase/firebase'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
-import AppRouter from './routers/AppRouter.jsx'
+import AppRouter, { history } from './routers/AppRouter.jsx'
 import configureStore from './store/configureStore'
 
 import { startSetExpenses } from './actions/expenses'
-import { setTextFilter } from './actions/filters'
+import { login, logout } from './actions/auth'
 import { getVisibleExpenses } from './selectors/expenses'
 
 const store = configureStore()
@@ -22,18 +22,36 @@ const app = (
   </Provider>
 )
 
+let hasRendered = false
+const renderApp = () => {
+  if(!hasRendered)
+  {
+    ReactDOM.render(app, document.getElementById("app"))
+  }
+}
+
 ReactDOM.render(
   <p>Loading...</p>,
   document.getElementById("app")
 )
 
-store.dispatch(startSetExpenses()).then(() => {
-  ReactDOM.render(app, document.getElementById("app"))
-})
 
 firebase.auth().onAuthStateChanged(user => {
   if (user)
-    console.log('logged in');
+  {
+    store.dispatch(login(user.uid))
+    store.dispatch(startSetExpenses()).then(() => {
+      renderApp()
+      if (history.location.pathname === '/')
+      {
+        history.push('/dashboard')
+      }
+    })
+  }
   else
-    console.log('logged out');
+  {
+    store.dispatch(logout())
+    history.push('/')
+    renderApp()
+  }
 })
