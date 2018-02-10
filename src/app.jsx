@@ -3,13 +3,11 @@ import './styles/styles.scss'
 import 'react-dates/lib/css/_datepicker.css'
 import 'react-dates/initialize'
 import { firebase } from './firebase/firebase'
-
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import AppRouter, { history } from './routers/AppRouter.jsx'
 import configureStore from './store/configureStore'
-
 import { startSetExpenses } from './actions/expenses'
 import { login, logout } from './actions/auth'
 import { getVisibleExpenses } from './selectors/expenses'
