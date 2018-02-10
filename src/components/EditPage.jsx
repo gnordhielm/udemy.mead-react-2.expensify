@@ -1,12 +1,15 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import ExpenseForm from './ExpenseForm.jsx'
-import { updateExpense, removeExpense } from '../actions/expenses'
+import {
+  startUpdateExpense,
+  startRemoveExpense
+} from '../actions/expenses'
 
 export class EditPage extends React.Component {
 
-  handleSubmit = expense => {
-    this.props.updateExpense(expense)
+  handleSubmit = changes => {
+    this.props.updateExpense(this.props.expense.id, changes)
     this.props.history.push('/')
   }
 
@@ -37,11 +40,10 @@ const mapState = (state, props) => ({
 })
 
 const mapDispatch = dispatch => ({
-  updateExpense: expense => dispatch(updateExpense({
-    id: expense.id,
-    changes: expense
+  updateExpense: (id, changes) => dispatch(startUpdateExpense({
+    id, changes
   })),
-  removeExpense: id => dispatch(removeExpense({ id }))
+  removeExpense: id => dispatch(startRemoveExpense(id))
 })
 
 export default connect(mapState, mapDispatch)(EditPage)

@@ -1,7 +1,24 @@
 import db from '../firebase/firebase'
 import uuid from 'uuid'
 
-// Expenses actions
+export const setExpenses = (expenses=[]) => ({
+  type: 'SET_EXPENSES', expenses
+})
+
+export const startSetExpenses = () => dispatch => {
+  return db.ref('expenses')
+    .once('value')
+    .then(snap => {
+      const expenses = []
+      snap.forEach(childSnap => {
+        expenses.push({
+          id: childSnap.key,
+          ...childSnap.val()
+        })
+      })
+      dispatch(setExpenses(expenses))
+    })
+}
 
 export const addExpense = expense => ({
   type: 'ADD_EXPENSE',
@@ -41,26 +58,29 @@ export const removeExpense = ({ id }) => ({
 })
 
 
+export const startRemoveExpense = id => dispatch => {
+
+  return db.ref('expenses/' + id)
+    .remove()
+    .then(() => {
+      dispatch(removeExpense({ id }))
+    })
+
+}
+
+
 export const updateExpense = ({ id, changes }) => ({
   type: 'UPDATE_EXPENSE',
   id, changes
 })
 
-export const setExpenses = (expenses=[]) => ({
-  type: 'SET_EXPENSES', expenses
-})
 
-export const startSetExpenses = () => dispatch => {
-  return db.ref('expenses')
-    .once('value')
-    .then(snap => {
-      const expenses = []
-      snap.forEach(childSnap => {
-        expenses.push({
-          id: childSnap.key,
-          ...childSnap.val()
-        })
-      })
-      dispatch(setExpenses(expenses))
+export const startUpdateExpense = ({ id, changes }) => dispatch => {
+
+  return db.ref('expenses/' + id)
+    .update(changes)
+    .then(() => {
+      dispatch(updateExpense({ id, changes }))
     })
+
 }

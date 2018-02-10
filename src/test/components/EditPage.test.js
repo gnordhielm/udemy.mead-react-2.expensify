@@ -25,12 +25,13 @@ test('should render EditPage', () => {
 
 test('should handle edit expense', () => {
 
+  const id = expenses[0].id
   const editedExpense = expenses[1]
 
   wrapper.find('ExpenseForm').prop('onSubmit')(editedExpense)
 
   expect(history.push).toHaveBeenLastCalledWith('/')
-  expect(updateExpense).toHaveBeenLastCalledWith(editedExpense)
+  expect(updateExpense).toHaveBeenLastCalledWith(id, editedExpense)
 
   expect(wrapper).toMatchSnapshot()
 

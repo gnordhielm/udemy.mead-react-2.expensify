@@ -1,7 +1,9 @@
 import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 import {
-  startAddExpense, addExpense, updateExpense, removeExpense,
+  startAddExpense, addExpense,
+  startUpdateExpense, updateExpense,
+  startRemoveExpense, removeExpense,
   startSetExpenses, setExpenses
 } from '../../actions/expenses'
 import expenses from '../fixtures/expenses'
@@ -131,5 +133,57 @@ test('should fetch the expenses from database', done => {
     })
     done()
   })
+
+})
+
+
+test('should remove an expense from the database', done => {
+
+  const { id } = expenses[0]
+  const store = createMockStore()
+
+  store
+    .dispatch(startRemoveExpense(id))
+    .then(() => {
+      const actions = store.getActions()
+      expect(actions[0]).toEqual({
+        type: 'REMOVE_EXPENSE',
+        id
+      })
+      return database
+        .ref('expenses/' + id)
+        .once('value')
+    })
+    .then(snap => {
+      expect(snap.val()).toBeNull()
+      done()
+    })
+
+})
+
+
+test('should update an expense in the database', done => {
+
+  const { id } = expenses[0]
+  const changes = {
+    amount: expenses[0].amount + 9000
+  }
+  const store = createMockStore()
+  store
+    .dispatch(startUpdateExpense({ id, changes }))
+    .then(() => {
+      const actions = store.getActions()
+      expect(actions[0]).toEqual({
+        type: 'UPDATE_EXPENSE',
+        id, changes
+      })
+      return database
+        .ref('expenses/' + id)
+        .once('value')
+    })
+    .then(snap => {
+      expect(snap.val().amount).toBe(changes.amount)
+      done()
+    })
 
 })
